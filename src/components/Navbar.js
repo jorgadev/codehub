@@ -1,6 +1,7 @@
 import React from "react";
 
 import fullLogo from "../assets/images/full-logo.png";
+import { Link } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -18,14 +19,20 @@ export default function Navbar() {
           justifyContent={{ base: "center", md: "space-between" }}
           alignItems="center"
         >
-          <Image width="256px" src={fullLogo} alt="CodeHub Logo" />
+          <Link to="/">
+            <Image width="256px" src={fullLogo} alt="CodeHub Logo" />
+          </Link>
           <ButtonGroup
             size="lg"
             colorScheme="twitter"
             display={{ base: "none", md: "flex" }}
           >
-            <Button>Log In</Button>
-            <Button variant="outline">Sign Up</Button>
+            <Link to="/login">
+              <Button>Log In</Button>
+            </Link>
+            <Link to="/signup">
+              <Button variant="outline">Sign Up</Button>
+            </Link>
           </ButtonGroup>
         </Flex>
       </Container>

@@ -1,27 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import "../assets/css/Styles.scss";
+import { AuthProvider } from "../contexts/AuthContext";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Subnavbar from "./Subnavbar";
 import Landing from "./Landing";
+import Signup from "./Signup";
+import Login from "./Login";
+import ForgotPassword from "./ForgotPassword";
+import Index from "./Index";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Subnavbar />
+    <AuthProvider>
       <Router>
-        <Route exact path="/" component={Landing} />
-        {/* <PrivateRoute path="/dashboard" component={} />
-        <PrivateRoute path="/teams" component={} />
-        <PrivateRoute path="/projects" component={} />
-        <PrivateRoute path="/settings" component={} />
-        <Route path="/signup" component={} />
-        <Route path="/login" component={} />
-        <Route path="/forgot-password" component={} /> */}
+        <Navbar />
+        <Subnavbar />
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <PrivateRoute exact path="/index" component={Index} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+        </Switch>
       </Router>
-    </>
+    </AuthProvider>
   );
 }
 

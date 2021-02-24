@@ -6,7 +6,7 @@ export default function Subnavbar() {
     <Center
       bg="blue.400"
       color="white"
-      paddingY={1}
+      py={1}
       textAlign="center"
       fontSize={{ base: "md", md: "lg" }}
     >
