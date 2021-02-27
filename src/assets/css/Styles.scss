@@ -7,3 +7,35 @@
 .chakra-text a {
   color: #1da1f2;
 }
+
+.back-icon {
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.main-wrapper {
+  height: calc(100vh - 115px);
+}
+
+.icon-block {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    font-size: 35px;
+    color: #e2e8f0 !important;
+  }
+}
+
+.active-icon-block {
+  background-color: #1a365d;
+
+  svg {
+    color: #fff !important;
+  }
+}

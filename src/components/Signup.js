@@ -20,12 +20,15 @@ export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
-
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { signup } = useAuth();
+  const { currentUser, signup } = useAuth();
   const history = useHistory();
+
+  // User can't reach register page if he is already logged in
+  if (currentUser) {
+    history.push("/dashboard");
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +41,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/index");
+      history.push("/dashboard");
     } catch {
       setError("Failed to create an account");
     }

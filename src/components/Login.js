@@ -19,12 +19,15 @@ import {
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
   const history = useHistory();
+
+  // User can't reach login page if he is already logged in
+  if (currentUser) {
+    history.push("/dashboard");
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,7 +36,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/index");
+      history.push("/dashboard");
     } catch {
       setError("Failed to log in");
     }

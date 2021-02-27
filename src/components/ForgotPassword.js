@@ -19,12 +19,16 @@ import {
 
 export default function Login() {
   const emailRef = useRef();
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const { currentUser, resetPassword } = useAuth();
+  const history = useHistory();
 
-  const { resetPassword } = useAuth();
+  // User can't reach forgot password page if he is already logged in
+  if (currentUser) {
+    history.push("/dashboard");
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
