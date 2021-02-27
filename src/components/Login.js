@@ -48,7 +48,9 @@ export default function Login() {
     >
       <Container>
         <form className="auth-form" onSubmit={handleSubmit}>
-          <Heading mb={10}>Log In</Heading>
+          <Heading size="lg" mb={10}>
+            Log In
+          </Heading>
           {error && <ErrorAlert error={error} setError={setError} />}
           <FormControl>
             <FormLabel>Email address</FormLabel>
@@ -63,7 +65,6 @@ export default function Login() {
               disabled={loading}
               type="submit"
               colorScheme="twitter"
-              size="lg"
               w="100%"
             >
               Login

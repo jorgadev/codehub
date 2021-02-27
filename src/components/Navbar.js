@@ -20,10 +20,9 @@ export default function Navbar() {
           alignItems="center"
         >
           <Link to="/">
-            <Image width="256px" src={fullLogo} alt="CodeHub Logo" />
+            <Image width="200px" src={fullLogo} alt="CodeHub Logo" />
           </Link>
           <ButtonGroup
-            size="lg"
             colorScheme="twitter"
             display={{ base: "none", md: "flex" }}
           >

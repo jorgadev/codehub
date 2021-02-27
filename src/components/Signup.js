@@ -72,7 +72,6 @@ export default function Signup() {
               disabled={loading}
               type="submit"
               colorScheme="twitter"
-              size="lg"
               w="100%"
             >
               Sign Up

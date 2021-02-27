@@ -32,6 +32,11 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password);
   }
 
+  // Reset password - returns a promise
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
   // Logout user - returns a promise
   function logout(email, password) {
     return auth.signOut();
@@ -42,6 +47,7 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     signup,
+    resetPassword,
     logout,
   };
 
