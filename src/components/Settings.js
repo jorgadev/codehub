@@ -1,16 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import {
-  Grid,
-  Box,
-  Heading,
-  Divider,
-  Container,
-  Image,
-  Center,
-  Spinner,
-  Flex,
-} from "@chakra-ui/react";
+import { Grid, Box, Heading, Divider, Container } from "@chakra-ui/react";
 
 import Sidebar from "./Sidebar";
 import Avatar from "./Avatar";
@@ -31,11 +21,6 @@ export default function Settings() {
         overflowY="scroll"
         position="relative"
       >
-        <Flex
-          justifyContent="center"
-          alignItems="center"
-          className="spinner-container"
-        ></Flex>
         <Heading as="h1" size="lg">
           Settings
         </Heading>

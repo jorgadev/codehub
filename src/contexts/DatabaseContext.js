@@ -11,10 +11,7 @@ export function useDatabase() {
 export function DatabaseProvider({ children }) {
   // Insert new data into collection
   function DB_insertNewData(collection, data) {
-    return db.collection(collection).doc(data.id).set({
-      id: data.id,
-      avatar: data.avatar,
-    });
+    return db.collection(collection).doc(data.id).set(data);
   }
 
   // Get document by id
@@ -24,7 +21,14 @@ export function DatabaseProvider({ children }) {
     return doc.data();
   }
 
-  // Add avatar to storage
+  // Get documents by collection name
+  async function DB_getDocumentsFromCollection(collection) {
+    const snapshot = db.collection(collection);
+    const doc = await snapshot.get();
+    return doc.docs.map((doc) => doc.data());
+  }
+
+  // Add avatar to storage and change avatar url in users collection
   async function DB_changeAvatar(file, userId) {
     const storageRef = storage.ref();
     const fileRef = storageRef.child(file.name);
@@ -36,11 +40,19 @@ export function DatabaseProvider({ children }) {
     });
   }
 
+  // Change username
+  function DB_changeUsername(email, userId) {
+    const username = email.split("@")[0];
+    return db.collection("users").doc(userId).update({ username: username });
+  }
+
   // All information from AuthContext
   const value = {
     DB_insertNewData,
     DB_getDocumentById,
     DB_changeAvatar,
+    DB_changeUsername,
+    DB_getDocumentsFromCollection,
   };
 
   //   Render children inside provider and pass value

@@ -54,6 +54,7 @@ export default function Signup() {
       const newUser = {
         id: newUserData.user.uid,
         avatar: DEFAULT_AVATAR,
+        username: newUserData.user.email.split("@")[0],
       };
       // Add new user to firestore
       await DB_insertNewData("users", newUser);

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useDatabase } from "../contexts/DatabaseContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import ErrorAlert from "./ErrorAlert";
 
@@ -27,7 +27,7 @@ export default function UpdateProfile() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser, updateEmail, updatePassword, logout } = useAuth();
-  const { DB_insertNewData } = useDatabase();
+  const { DB_changeUsername } = useDatabase();
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -42,7 +42,10 @@ export default function UpdateProfile() {
     setLoading(true);
 
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+      promises.push(
+        updateEmail(emailRef.current.value),
+        DB_changeUsername(emailRef.current.value, currentUser.uid)
+      );
     }
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
