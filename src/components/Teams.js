@@ -23,6 +23,7 @@ import {
   Tag,
   TagLabel,
   TagCloseButton,
+  Image,
 } from "@chakra-ui/react";
 import Autosuggest from "react-autosuggest";
 
@@ -68,10 +69,16 @@ export default function Teams() {
 
     return inputLength === 0
       ? []
-      : allUsers.filter(
-          (user) =>
-            user.username.toLowerCase().slice(0, inputLength) === inputValue
-        );
+      : allUsers
+          .filter(
+            (oneUser) =>
+              oneUser.username !== user.username &&
+              !teamMembers.includes(oneUser.username)
+          )
+          .filter(
+            (user) =>
+              user.username.toLowerCase().slice(0, inputLength) === inputValue
+          );
   };
 
   // When suggestion is clicked, Autosuggest needs to populate the input
@@ -80,10 +87,30 @@ export default function Teams() {
   const getSuggestionValue = (suggestion) => suggestion.username;
 
   // Use your imagination to render suggestions.
-  const renderSuggestion = (suggestion) => <div>{suggestion.username}</div>;
+  const renderSuggestion = (suggestion) => (
+    <Grid
+      className="suggestion-container"
+      templateColumns="50px auto"
+      alignItems="center"
+    >
+      <Image src={suggestion.avatar} />
+      <Text>{suggestion.username}</Text>
+    </Grid>
+  );
 
   const onChange = (event, { newValue }) => {
-    setValue(newValue);
+    const usernames = allUsers.map((user) => user.username);
+    if (
+      usernames.includes(newValue) &&
+      newValue !== user.username &&
+      !teamMembers.includes(newValue)
+    ) {
+      const newMember = newValue;
+      setTeamMembers([...teamMembers, newMember]);
+      setValue("");
+    } else {
+      setValue(newValue);
+    }
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -99,9 +126,16 @@ export default function Teams() {
 
   // Autosuggest will pass through all these props to the input.
   const inputProps = {
-    placeholder: "Type a programming language",
+    placeholder: "Start typing username..",
     value,
     onChange,
+  };
+
+  const handleRemoveMember = async (idx) => {
+    const filteredTeamMembers = teamMembers.filter(
+      (member) => teamMembers.indexOf(member) !== idx
+    );
+    setTeamMembers(filteredTeamMembers);
   };
 
   return (
@@ -162,9 +196,9 @@ export default function Teams() {
                   inputProps={inputProps}
                 />
               </FormControl>
-              <HStack spacing={4} mt={5}>
+              <HStack spacing={1} mt={5}>
                 {teamMembers &&
-                  teamMembers.map((member) => (
+                  teamMembers.map((member, idx) => (
                     <Tag
                       borderRadius="full"
                       variant="solid"
@@ -172,7 +206,11 @@ export default function Teams() {
                       key={member}
                     >
                       <TagLabel>{member}</TagLabel>
-                      {member !== user.username ? <TagCloseButton /> : null}
+                      {member !== user.username ? (
+                        <TagCloseButton
+                          onClick={() => handleRemoveMember(idx)}
+                        />
+                      ) : null}
                     </Tag>
                   ))}
               </HStack>

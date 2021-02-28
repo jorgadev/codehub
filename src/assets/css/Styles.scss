@@ -1,3 +1,7 @@
+ul {
+  list-style-type: none;
+}
+
 .auth-form {
   border: 1px solid #cbd5e0;
   padding: 3rem 2rem;
@@ -125,5 +129,41 @@
   &:hover {
     cursor: pointer;
     transform: scale(1.01);
+  }
+}
+
+.react-autosuggest__container {
+  width: 100%;
+
+  input {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    height: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.375rem;
+
+    &:focus {
+      border-width: 2px;
+      border-color: #3182ce;
+      outline: none;
+    }
+  }
+}
+
+.suggestion-container {
+  list-style-type: none;
+  border: 1px solid #e2e8f0;
+  z-index: 3;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #f7fafc;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    padding: 2.5px;
   }
 }
