@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <Grid
       gridTemplateRows={{ base: "0", md: "60px 60px 60px auto 60px" }}
-      gridTemplateColumns={{ base: "60px 60px 60px auto 60px", md: "0" }}
+      gridTemplateColumns={{ base: "1fr 1fr 1fr 0 1fr", md: "0" }}
       bg="blue.800"
       gridRow={{ base: "2", md: "1" }}
     >

@@ -1,14 +1,23 @@
 import React from "react";
 
-import { Grid } from "@chakra-ui/react";
+import { Grid, Box, Heading, Divider } from "@chakra-ui/react";
 
 import Sidebar from "./Sidebar";
 
 export default function Teams() {
   return (
-    <Grid className="main-wrapper" gridTemplateColumns="60px auto">
+    <Grid
+      className="main-wrapper"
+      gridTemplateColumns={{ base: "auto", md: "60px auto" }}
+      gridTemplateRows={{ base: "auto 60px", md: "none" }}
+    >
       <Sidebar />
-      <p>other stuff</p>
+      <Box className="content-wrapper" p={2.5}>
+        <Heading as="h1" size="lg">
+          Teams
+        </Heading>
+        <Divider my={3} />
+      </Box>
     </Grid>
   );
 }

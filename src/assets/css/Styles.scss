@@ -30,6 +30,10 @@
     font-size: 35px;
     color: #e2e8f0 !important;
   }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .active-icon-block {
@@ -38,4 +42,9 @@
   svg {
     color: #fff !important;
   }
+}
+
+.subnavbar-username {
+  color: #fff;
+  font-weight: 500;
 }

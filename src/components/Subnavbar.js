@@ -23,8 +23,11 @@ export default function Subnavbar() {
             onClick={() => history.goBack()}
             className="back-icon"
           />
-          <Text>
-            Logged in as <i>{currentUser.email.split("@")[0]}</i>
+          <Text color="gray.100">
+            Logged in as{" "}
+            <span className="subnavbar-username">
+              {currentUser.email.split("@")[0]}
+            </span>
           </Text>
         </Flex>
       )}
