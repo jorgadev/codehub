@@ -48,3 +48,10 @@
   color: #fff;
   font-weight: 500;
 }
+
+.spinner-container {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}

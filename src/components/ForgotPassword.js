@@ -51,7 +51,7 @@ export default function Login() {
       height="calc(100vh - 135px)"
     >
       <Container>
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="auth-form" onSubmit={(e) => handleSubmit(e)}>
           <Heading mb={10}>Password Reset</Heading>
           {error && <ErrorAlert error={error} setError={setError} />}
           {success && (

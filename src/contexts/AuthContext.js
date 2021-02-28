@@ -22,22 +22,29 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  // Signup user - returns a promise
+  // Signup user
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
-  // Login user - returns a promise
+  // Login user
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
   }
 
-  // Reset password - returns a promise
+  // Reset password
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email);
   }
 
-  // Logout user - returns a promise
+  function updateEmail(email) {
+    return currentUser.updateEmail(email);
+  }
+  function updatePassword(password) {
+    return currentUser.updatePassword(password);
+  }
+
+  // Logout user
   function logout(email, password) {
     return auth.signOut();
   }
@@ -48,6 +55,8 @@ export function AuthProvider({ children }) {
     login,
     signup,
     resetPassword,
+    updateEmail,
+    updatePassword,
     logout,
   };
 

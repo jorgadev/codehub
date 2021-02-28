@@ -9,8 +9,6 @@ export default function Subnavbar() {
   const { currentUser } = useAuth();
   const history = useHistory();
 
-  console.log(currentUser);
-
   return (
     <Box bg="blue.400" color="white" py={1} px={3}>
       {!currentUser ? (

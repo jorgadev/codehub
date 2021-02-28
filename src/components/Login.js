@@ -50,7 +50,7 @@ export default function Login() {
       height="calc(100vh - 135px)"
     >
       <Container>
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="auth-form" onSubmit={(e) => handleSubmit(e)}>
           <Heading size="lg" mb={10}>
             Log In
           </Heading>

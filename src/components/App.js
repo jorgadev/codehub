@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/css/Styles.scss";
 import { AuthProvider } from "../contexts/AuthContext";
+import { DatabaseProvider } from "../contexts/DatabaseContext";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "./Navbar";
@@ -18,20 +19,22 @@ import Projects from "./Projects";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Navbar />
-        <Subnavbar />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/teams" component={Teams} />
-          <PrivateRoute exact path="/projects" component={Projects} />
-          <PrivateRoute exact path="/settings" component={Settings} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-        </Switch>
-      </Router>
+      <DatabaseProvider>
+        <Router>
+          <Navbar />
+          <Subnavbar />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/teams" component={Teams} />
+            <PrivateRoute exact path="/projects" component={Projects} />
+            <PrivateRoute exact path="/settings" component={Settings} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+        </Router>
+      </DatabaseProvider>
     </AuthProvider>
   );
 }

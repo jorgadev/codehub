@@ -20,7 +20,7 @@ export default function SuccessAlert({ success, setSuccess }) {
         position="absolute"
         right="8px"
         top="8px"
-        onClick={closeAlert}
+        onClick={() => closeAlert()}
       />
     </Alert>
   );
