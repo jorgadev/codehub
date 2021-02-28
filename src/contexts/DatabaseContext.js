@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { firestore as db } from "../firebase";
+import { firestore as db, storage } from "../firebase";
 
 const DatabaseContext = React.createContext();
 
@@ -24,10 +24,23 @@ export function DatabaseProvider({ children }) {
     return doc.data();
   }
 
+  // Add avatar to storage
+  async function DB_changeAvatar(file, userId) {
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    const fileURL = await fileRef.getDownloadURL();
+    return db.collection("users").doc(userId).set({
+      id: userId,
+      avatar: fileURL,
+    });
+  }
+
   // All information from AuthContext
   const value = {
     DB_insertNewData,
     DB_getDocumentById,
+    DB_changeAvatar,
   };
 
   //   Render children inside provider and pass value
