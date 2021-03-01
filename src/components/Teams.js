@@ -39,6 +39,7 @@ export default function Teams() {
   const [user, setUser] = useState();
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [teamName, setTeamName] = useState("");
   const { DB_getDocumentById, DB_getDocumentsFromCollection } = useDatabase();
 
   useEffect(() => {
@@ -138,6 +139,14 @@ export default function Teams() {
     setTeamMembers(filteredTeamMembers);
   };
 
+  const handleCreateTeam = () => {
+    if (teamName !== "") {
+      // create new team in db
+      // iitd
+      onClose();
+    }
+  };
+
   return (
     <Grid
       className="main-wrapper"
@@ -183,7 +192,11 @@ export default function Teams() {
             <ModalBody mt={3} pb={6}>
               <FormControl>
                 <FormLabel>Team Name</FormLabel>
-                <Input placeholder="ex. Teamzy" />
+                <Input
+                  placeholder="ex. Teamzy"
+                  teamName={teamName}
+                  onChange={(e) => setTeamName(e.target.value)}
+                />
               </FormControl>
               <FormControl mt={4}>
                 <FormLabel>Members</FormLabel>
@@ -216,7 +229,7 @@ export default function Teams() {
               </HStack>
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme="twitter" mr={3}>
+              <Button colorScheme="twitter" mr={3} onClick={handleCreateTeam}>
                 Save
               </Button>
               <Button onClick={onClose}>Cancel</Button>
