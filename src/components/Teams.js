@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Autosuggest from "react-autosuggest";
+import AddIcon from "@material-ui/icons/Add";
+import Sidebar from "./Sidebar";
 import { useAuth } from "../contexts/AuthContext";
 import { useDatabase } from "../contexts/DatabaseContext";
+import ErrorAlert from "./ErrorAlert";
+
 import {
   Grid,
   Box,
@@ -25,10 +30,6 @@ import {
   TagCloseButton,
   Image,
 } from "@chakra-ui/react";
-import Autosuggest from "react-autosuggest";
-
-import AddIcon from "@material-ui/icons/Add";
-import Sidebar from "./Sidebar";
 
 export default function Teams() {
   const [teams, setTeams] = useState(null);
@@ -40,6 +41,7 @@ export default function Teams() {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [teamName, setTeamName] = useState("");
+  const [error, setError] = useState("");
   const { DB_getDocumentById, DB_getDocumentsFromCollection } = useDatabase();
 
   useEffect(() => {
@@ -107,8 +109,11 @@ export default function Teams() {
       !teamMembers.includes(newValue)
     ) {
       const newMember = newValue;
+      setValue(newMember);
       setTeamMembers([...teamMembers, newMember]);
-      setValue("");
+      setTimeout(() => {
+        setValue("");
+      }, 200);
     } else {
       setValue(newValue);
     }
@@ -140,10 +145,15 @@ export default function Teams() {
   };
 
   const handleCreateTeam = () => {
+    setError("");
+    setTeamName("");
+    setValue("");
+    setTeamMembers([user.username]);
     if (teamName !== "") {
-      // create new team in db
-      // iitd
+      console.log("create team");
       onClose();
+    } else {
+      setError("Failed to create team");
     }
   };
 
@@ -190,11 +200,12 @@ export default function Teams() {
             <ModalHeader>Create New Team</ModalHeader>
             <Divider />
             <ModalBody mt={3} pb={6}>
+              {error && <ErrorAlert error={error} setError={setError} />}
               <FormControl>
                 <FormLabel>Team Name</FormLabel>
                 <Input
                   placeholder="ex. Teamzy"
-                  teamName={teamName}
+                  value={teamName}
                   onChange={(e) => setTeamName(e.target.value)}
                 />
               </FormControl>
